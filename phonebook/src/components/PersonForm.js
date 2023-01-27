@@ -1,16 +1,16 @@
-const PersonForm = ({ persons, handlers }) => {
+const PersonForm = ({ name, number, handlers }) => {
     return (
         <form>
             <div>name:
                 <input
-                    value={newName}
+                    value={name}
                     onChange={handlers[0]}
                 />
             </div>
             <div>number:
                 <input
-                    value={newNumber}
-                    onChange={handlers[0]}
+                    value={number}
+                    onChange={handlers[1]}
                 />
             </div>
             <div>

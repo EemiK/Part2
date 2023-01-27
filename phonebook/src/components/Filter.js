@@ -4,7 +4,7 @@ const Filter = ({ filter, handler }) => {
             <div>filter shown with
                 <input
                     value={filter}
-                    onChange={handleFilterChange}
+                    onChange={handler}
                 />
             </div>
         </form>
