@@ -1,6 +1,6 @@
-const PersonForm = ({ name, number, handlers }) => {
+const PersonForm = ({ name, number, handlers, submit }) => {
     return (
-        <form>
+        <form onSubmit={submit}>
             <div>name:
                 <input
                     value={name}
