@@ -34,7 +34,16 @@ const App = () => {
         .then(returnPerson => {
           setPersons(persons.concat(returnPerson))
         })
-      : alert(`${newName} is already added to phonebook`)
+      :
+      window.confirm(`${newName} is already added to phonebook, replace the old number with new one?`)
+        ?
+        personService
+          .update(persons.find(n => n.name === newName).id, newPerson)
+          .then(response => {
+            setPersons(persons.map(person => person.name !== newName ? person : response))
+          })
+        :
+        console.log('cancelled number change')
     setNewName('')
     setNewNumber('')
   }
@@ -45,10 +54,10 @@ const App = () => {
       ?
       personService
         .deletePerson(id).then(returnPerson => {
-          setPersons(persons.map(person => person.id !== id))
+          setPersons(persons.filter(person => person.id !== id))
         })
       :
-      console.log('cancelled')
+      console.log('cancelled deletion')
   }
 
   const personsToShow = persons.filter(person => (person.name.toLowerCase().includes(filter.toLowerCase())))
