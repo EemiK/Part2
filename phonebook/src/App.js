@@ -24,7 +24,7 @@ const App = () => {
     event.preventDefault()
     const newPerson = {
       name: newName,
-      number: newNumber
+      number: newNumber,
     }
 
     !persons.map(person => person.name).includes(newName)
@@ -37,6 +37,15 @@ const App = () => {
       : alert(`${newName} is already added to phonebook`)
     setNewName('')
     setNewNumber('')
+  }
+
+  const deletePersonFrom = (id) => {
+    const person = persons.find(n => n.id === id)
+
+    noteService
+      .deletePerson(id).then(returnPerson => {
+        setPersons(persons.map(person => person.id !== id))
+      })
   }
 
   const personsToShow = persons.filter(person => (person.name.toLowerCase().includes(filter.toLowerCase())))
@@ -66,7 +75,11 @@ const App = () => {
       />
       <h2>Numbers</h2>
       {personsToShow.map(person =>
-        <Person key={person.id} person={person} />
+        <Person
+          person={person}
+          deletePerson={() => deletePersonFrom(person.id)}
+          key={person.id}
+        />
       )}
     </div>
   )
