@@ -40,9 +40,7 @@ const App = () => {
   }
 
   const deletePersonFrom = (id) => {
-    const person = persons.find(n => n.id === id)
-
-    noteService
+    personService
       .deletePerson(id).then(returnPerson => {
         setPersons(persons.map(person => person.id !== id))
       })
