@@ -40,10 +40,15 @@ const App = () => {
   }
 
   const deletePersonFrom = (id) => {
-    personService
-      .deletePerson(id).then(returnPerson => {
-        setPersons(persons.map(person => person.id !== id))
-      })
+    const person = persons.find(n => n.id === id)
+    window.confirm(`Delete ${person.name} ?`)
+      ?
+      personService
+        .deletePerson(id).then(returnPerson => {
+          setPersons(persons.map(person => person.id !== id))
+        })
+      :
+      console.log('cancelled')
   }
 
   const personsToShow = persons.filter(person => (person.name.toLowerCase().includes(filter.toLowerCase())))
