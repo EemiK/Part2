@@ -48,7 +48,12 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter filter={filter} handler={handleFilterChange} />
       <h2>add a new</h2>
-      <PersonForm name={newName} number={newNumber} handlers={[handleNameChange, handleNumberChange]} submit={addPerson} />
+      <PersonForm
+        name={newName}
+        number={newNumber}
+        handlers={[handleNameChange, handleNumberChange]}
+        submit={addPerson}
+      />
       <h2>Numbers</h2>
       {personsToShow.map(person =>
         <Person key={person.id} person={person} />
