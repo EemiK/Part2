@@ -4,6 +4,7 @@ import PersonForm from './components/PersonForm'
 import personService from './services/persons'
 import Filter from './components/Filter'
 import Notification from './components/Notification'
+import Error from './components/Error'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -11,6 +12,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [message, setNewMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -19,8 +21,6 @@ const App = () => {
         setPersons(initalPersons)
       })
   }, [])
-
-  console.log('render', persons.length, 'persons')
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -55,6 +55,14 @@ const App = () => {
               setNewMessage(null)
             }, 5000)
             setPersons(persons.map(person => person.name !== newName ? person : response))
+          })
+          .catch(error => {
+            setErrorMessage(
+              `Information of ${newName} has already been removed from server`
+            )
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)
           })
         :
         console.log('cancelled number change')
@@ -92,6 +100,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Notification message={message} />
+      <Error message={errorMessage} />
       <Filter filter={filter} handler={handleFilterChange} />
       <h2>add a new</h2>
       <PersonForm
