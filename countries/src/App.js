@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import countrieService from './services/countries'
+import getAll from './services/countries'
 
 
 const App = () => {
@@ -8,20 +8,32 @@ const App = () => {
   const [message, setMessage] = useState(null)
 
   useEffect(() => {
-    countrieService
-      .getAll()
+    getAll()
       .then(countries => {
-        (countries.length > 10)
-          ?
-          setMessage('Too many matches, specify another filter')
-          :
-          setCountries(countries)
+        setCountries(countries)
       })
   }, [search])
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value)
   }
+
+  const filtered =
+    countries
+      .filter(countrie => {
+        countrie
+          .name
+          .common
+          .toLowerCase()
+          .includes(search)
+      })
+
+  const mapped =
+    filtered.length > 10
+      ?
+      <div>Too many matches, specify another filter</div>
+      :
+      filtered.map(c => <div>{c.name.common}</div>)
 
   return (
     <div>
@@ -33,7 +45,7 @@ const App = () => {
           />
         </div>
       </form>
-      <div>{message}</div>
+      <div>{mapped}</div>
     </div>
   )
 }
