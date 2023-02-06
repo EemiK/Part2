@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import getAll from './services/countries'
-import Filter from './components/Filter'
+import Country from './components/Country'
+import Only from './components/Only'
 
 
 const App = () => {
@@ -28,6 +29,27 @@ const App = () => {
           .includes(search)
       )
 
+  const countriesToShow = () => {
+    if (filtered.length > 10) {
+      return (
+        <div>Too many matches, specify another filter</div>
+      )
+    } else if (filtered.length === 1) {
+      return (
+        <Only country={filtered[0]} />
+      )
+    } else {
+      return (
+        filtered.map(c =>
+          <Country
+            country={c}
+            key={filtered.indexOf(c)}
+          />
+        )
+      )
+    }
+  }
+
   console.log(filtered)
 
   return (
@@ -41,7 +63,7 @@ const App = () => {
         </div>
       </form>
       <div>
-        <Filter countries={filtered} />
+        {countriesToShow()}
       </div>
     </div>
   )
