@@ -1,3 +1,11 @@
+const Element = ({ value }) => {
+    return (
+        <li>
+            {value}
+        </li>
+    )
+}
+
 const Only = ({ country }) => {
     return (
         <div>
@@ -7,6 +15,16 @@ const Only = ({ country }) => {
             <h3>
                 <strong>languages:</strong>
             </h3>
+            <ul>
+                {Object.values(country.languages)
+                    .map(l =>
+                        <Element
+                            value={l}
+                            key={Object.values(country.languages).indexOf(l)}
+                        />
+                    )
+                }
+            </ul>
             <div>
                 <img src={country.flags.png} />
             </div>
