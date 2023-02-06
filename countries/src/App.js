@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import getAll from './services/countries'
+import Filter from './components/Filter'
 
 
 const App = () => {
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('sw')
   const [countries, setCountries] = useState([])
   const [message, setMessage] = useState(null)
 
@@ -12,7 +13,7 @@ const App = () => {
       .then(countries => {
         setCountries(countries)
       })
-  }, [search])
+  }, [])
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value)
@@ -20,20 +21,15 @@ const App = () => {
 
   const filtered =
     countries
-      .filter(countrie => {
+      .filter(countrie =>
         countrie
           .name
           .common
           .toLowerCase()
           .includes(search)
-      })
+      )
 
-  const mapped =
-    filtered.length > 10
-      ?
-      <div>Too many matches, specify another filter</div>
-      :
-      filtered.map(c => <div>{c.name.common}</div>)
+  console.log(filtered)
 
   return (
     <div>
@@ -45,7 +41,9 @@ const App = () => {
           />
         </div>
       </form>
-      <div>{mapped}</div>
+      <div>
+        <Filter countries={filtered} />
+      </div>
     </div>
   )
 }
