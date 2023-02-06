@@ -4,11 +4,11 @@ const Only = ({ country }) => {
             <h1>{country.name.common}</h1>
             <div>capital {country.capital}</div>
             <div>area {country.area}</div>
-            <div>
+            <h3>
                 <strong>languages:</strong>
-            </div>
+            </h3>
             <div>
-                <img src={country.flag.png} />
+                <img src={country.flags.png} />
             </div>
         </div>
     )
