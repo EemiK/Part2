@@ -1,3 +1,5 @@
+import Weather from './Weather'
+
 const Element = ({ value }) => {
     return (
         <li>
