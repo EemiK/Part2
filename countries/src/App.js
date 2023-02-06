@@ -4,9 +4,8 @@ import Filter from './components/Filter'
 
 
 const App = () => {
-  const [search, setSearch] = useState('sw')
+  const [search, setSearch] = useState('')
   const [countries, setCountries] = useState([])
-  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     getAll()
