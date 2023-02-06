@@ -7,6 +7,7 @@ const Element = ({ value }) => {
 }
 
 const Only = ({ country }) => {
+
     return (
         <div>
             <h1>{country.name.common}</h1>
@@ -28,6 +29,7 @@ const Only = ({ country }) => {
             <div>
                 <img src={country.flags.png} />
             </div>
+            <Weather capital={country.capital} />
         </div>
     )
 }
