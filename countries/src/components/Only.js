@@ -1,5 +1,3 @@
-import Weather from './Weather'
-
 const Element = ({ value }) => {
     return (
         <li>
@@ -31,7 +29,6 @@ const Only = ({ country }) => {
             <div>
                 <img src={country.flags.png} />
             </div>
-            <Weather capital={country.capital} />
         </div>
     )
 }
