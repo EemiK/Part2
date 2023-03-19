@@ -42,6 +42,19 @@ const App = () => {
           }, 5000)
           setPersons(persons.concat(returnPerson))
         })
+        .catch(error => {
+          setErrorMessage(
+            "Person validation failed: name: Path "
+            + "`name `"
+            + "(`"
+            + newPerson.name
+            + "`) "
+            + "is shorter than the minimum allowed lenth (3)."
+          )
+          setTimeout(() => {
+            setNewMessage(null)
+          }, 5000)
+        })
       :
       window.confirm(`${newName} is already added to phonebook, replace the old number with new one?`)
         ?
