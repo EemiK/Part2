@@ -43,16 +43,9 @@ const App = () => {
           setPersons(persons.concat(returnPerson))
         })
         .catch(error => {
-          setErrorMessage(
-            "Person validation failed: name: Path "
-            + "`name `"
-            + "(`"
-            + newPerson.name
-            + "`) "
-            + "is shorter than the minimum allowed lenth (3)."
-          )
+          setErrorMessage(error.response.data.error)
           setTimeout(() => {
-            setNewMessage(null)
+            setErrorMessage(null)
           }, 5000)
         })
       :
