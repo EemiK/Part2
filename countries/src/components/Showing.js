@@ -26,7 +26,7 @@ const Showing = ({ country }) => {
                 }
             </ul>
             <div>
-                <img src={country.flags.png} />
+                <img src={country.flags.png} alt={'flag'} />
             </div>
         </div>
     )
